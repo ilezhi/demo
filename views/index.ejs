@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <style media="screen">
+      #chart {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            aone
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#chart_pane" aria-controls="chart" role="tab" data-toggle="tab">Home</a></li>
+        <li role="presentation"><a href="#add_data" aria-controls="add_data" role="tab" data-toggle="tab">Profile</a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="chart_pane">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">近一年</button>
+                <button type="button" class="btn btn-default">近30天</button>
+                <button type="button" class="btn btn-default">近7天</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <input class="form-control" type="date" placeholder="start time" name="" value="">
+                <span class="input-group-addon">-</span>
+                <input class="form-control" type="date" placeholder="end time" name="" value="">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" name="button">确定</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart">
+
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="add_data">
+          <textarea id="data_container" class="form-control" name="name" rows="16" cols="80"></textarea>
+          <button id="importData" class="btn btn-default" type="button" name="button">导入</button>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
