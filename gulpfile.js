@@ -11,7 +11,7 @@ gulp.task('copyjs', function() {
                     './node_modules/echarts/dist/echarts.min.js',
                   './node_modules/jquery/dist/jquery.min.js',
                   './node_modules/moment/min/moment.min.js'])
-            .pipe(gulp.dest('./public/javascripts'));
+            .pipe(gulp.dest('./public/lib'));
 })
 
 gulp.task('default', ['copycss', 'copyjs']);
