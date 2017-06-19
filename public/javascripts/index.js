@@ -107,6 +107,18 @@ $(function() {
           alert(err.message);
         });
     },
+    importData: function(data) {
+      this.fetch('/api/v1/create', 'post', {data: data})
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(res) {
+          alert(res.msg);
+        })
+        .catch(function(err) {
+          alert(err.message);
+        });
+    },
     formater: function(data) {
       var axis = [];
       var series = [];
@@ -132,6 +144,10 @@ $(function() {
   // 时间筛选
   var format = 'YYYY-MM-DD HH:mm:ss';
   $('#btnGroup').on('click', 'button', function() {
+    $(this).addClass('btn-primary');
+    $(this).siblings('.btn-primary').removeClass('btn-primary');
+    $('#custom').removeClass('btn-primary');
+
     var i = $(this).index();
     var now = moment();
     var end = moment().format(format);
@@ -158,9 +174,11 @@ $(function() {
     var start = $('#btn_start').val();
     var end = $('#btn_end').val();
     if (start === '' || end === '') {
-      alert('日期时间都要选');
+      return alert('日期时间都要选');
     }
-    console.log(start, end);
+    
+    $(this).addClass('btn-primary');
+    $('#btnGroup button.btn-primary').removeClass('btn-primary');    
     bw.getDataList(start, end);
   });
 
@@ -177,21 +195,8 @@ $(function() {
       return;
     }
 
-    bw.fetch('/api/v1/create', 'post', {data: data})
-      .then(function(res) {
-        return res.json();
-      })
-      .then(function(res) {
-        if (res.code !==200) {
-          alert(res.msg);
-          return;
-        }
-
-        alert(res.msg);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-      });
+    bw.importData(data);
+    
   });
 
 });
