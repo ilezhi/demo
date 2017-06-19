@@ -21,7 +21,7 @@ $(function() {
       };
 
       if (method === 'GET') {
-        let queryStr = '?' + Object.keys(data).map(function(key) {
+        url += '?' + Object.keys(data).map(function(key) {
           return key + '=' + data[key];
         }).join('&');
       } else {
@@ -52,11 +52,14 @@ $(function() {
     dataType: 'json'
   });
 
+  var bw = new BandWidth();
+  bw.getDataList('2017-01', '2017-09');
+
   // 批量导入
   // var regBatch = /^\[[\s\S]*\]$/;
   // 导入数据
   $('#importData').on('click', function() {
-    var val = $('#data_container').val().trim();
+    var val = $('#data_container').val().trim().replace(/\n/g, '');
 
     try {
       var data = JSON.parse(val);
@@ -65,12 +68,20 @@ $(function() {
       return;
     }
 
-    console.log(data);
-    $.post('/api/v1/create', data)
-    .done(function(res) {
-      console.log(res);
-    });
+    bw.fetch('/api/v1/create', 'post', {data: data})
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(res) {
+        if (res.code !==200) {
+          alert(res.msg);
+          return;
+        }
 
-
+        alert(res.msg);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+      });
   });
 });
