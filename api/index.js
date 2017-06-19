@@ -1,11 +1,23 @@
 var mongoose = require('mongoose');
 var BandWidth = require('../models').BandWidth;
+var moment = require('moment');
 mongoose.Promise = global.Promise;
 
 // 根据时间筛选带宽值列表
 exports.index = async function(req, res, next) {
   let {start, end} = req.query;
+
+  if (start === '' || end === '') {
+    return res.json({
+      code: 500,
+      msg: '缺少时间参数'
+    });
+  }
   
+  // 转化成isodate再进行匹配
+  start = moment(start).utcOffset(-8);
+  end = moment(end).utcOffset(-8);
+
   let query = BandWidth
                 .find()
                 .select('bandwidth date')
@@ -13,7 +25,7 @@ exports.index = async function(req, res, next) {
   
   try {
     let result = await query.exec();
-    return json({
+    return res.json({
       code: 200,
       msg: 'success',
       data: result

@@ -7,6 +7,9 @@
       #chart {
         height: 400px;
       }
+      .tab-content {
+        padding: 20px 0 0;
+      }
     </style>
   </head>
   <body>
@@ -30,19 +33,19 @@
         <div role="tabpanel" class="tab-pane active" id="chart_pane">
           <div class="row">
             <div class="col-md-3">
-              <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default">近一年</button>
-                <button type="button" class="btn btn-default">近30天</button>
+              <div id="btnGroup" class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">近一天</button>
+                <button type="button" class="btn btn-default">近两天</button>
                 <button type="button" class="btn btn-default">近7天</button>
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-group">
-                <input class="form-control" type="date" placeholder="start time" name="" value="">
+                <input id="btn_start" class="form-control" type="datetime-local" placeholder="start time" name="" value="">
                 <span class="input-group-addon">-</span>
-                <input class="form-control" type="date" placeholder="end time" name="" value="">
+                <input id="btn_end" class="form-control" type="datetime-local" placeholder="end time" name="" value="">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" name="button">确定</button>
+                  <button id="custom" class="btn btn-default" type="button" name="button">确定</button>
                 </span>
               </div>
             </div>
@@ -58,9 +61,10 @@
         </div>
       </div>
     </div>
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/moment.min.js"></script>
-    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/moment.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/echarts.min.js"></script>
     <script src="/javascripts/index.js"></script>
   </body>
 </html>
